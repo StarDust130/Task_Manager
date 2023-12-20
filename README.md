@@ -9,7 +9,7 @@
 - 🌐 React Router Integration: Seamlessly navigate through different sections of the application with the power of React Router.
 
 - 🔍 Filter Tasks: Easily organize and find your tasks using the built-in filter feature, making task management a breeze.
-- 
+
 - 🛠️ CRUD Operations (✨Create, 📖Read, 🔄Update, 🗑️Delete): Comprehensive task management with the ability to Create, Read, Update, and Delete tasks effortlessly.
 
 ## Technologies Used
