@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Borel&family=Concert+One&family=Dancing+Script&family=Fasthand&family=IBM+Plex+Sans:ital,wght@0,600;1,500&family=Inter:wght@500&family=Lato:ital@1&family=Merriweather:wght@700&family=Neucha&family=Playpen+Sans&family=Raleway&family=Roboto:ital@1&family=Special+Elite&family=Yeseva+One&display=swap');
+
+body {
+  background-color: black;
+  color: white;
+  font-family: "Lato", sans-serif; 
+  font-size: 1.2rem;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+}
