@@ -2,6 +2,8 @@
 ### Welcome to the Awesome Task Manager! 🚀 Built with React, Tailwind CSS, Redux, and React Router for seamless task management, featuring bold CRUD operations.
 
 ## Features
+- 🛠️ CRUD Operations (✨Create, 📖Read, 🔄Update, 🗑️Delete): Comprehensive task management with the ability to Create, Read, Update, and Delete tasks effortlessly.
+  
 - ✅ Responsive Design: Enjoy a smooth and user-friendly experience across various devices and screen sizes.
 
 - 🔄 Redux State Management: Efficiently manage the application state with Redux, ensuring a centralized and predictable data flow.
@@ -10,7 +12,6 @@
 
 - 🔍 Filter Tasks: Easily organize and find your tasks using the built-in filter feature, making task management a breeze.
 
-- 🛠️ CRUD Operations (✨Create, 📖Read, 🔄Update, 🗑️Delete): Comprehensive task management with the ability to Create, Read, Update, and Delete tasks effortlessly.
 
 ## Technologies Used
 - React: A powerful JavaScript library for building user interfaces.
