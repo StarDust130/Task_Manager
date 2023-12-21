@@ -1,31 +1,36 @@
-import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { RxCross2 } from "react-icons/rx";
+
 import { useDispatch, useSelector } from "react-redux";
-import { clearSearchTerm, setSearchTerm } from "../redux/taskSlice";
+import {
+  clearSearchTerm,
+  setSearchTerm,
+  setPriority,
+  setDate,
+  clearAll,
+} from "../redux/taskSlice";
+
 
 const Filter = () => {
-    // const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedPriority, setSelectedPriority] = useState("");
-
   const dispatch = useDispatch();
   const searchTerm = useSelector((state) => state.tasks.searchTerm);
+  const selectedPriority = useSelector((state) => state.tasks.selectedPriority);
+  const selectedDate = useSelector((state) => state.tasks.selectedDate);
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    dispatch(setDate(date));
   };
 
   const handlePriorityChange = (e) => {
-    setSelectedPriority(e.target.value);
+    dispatch(setPriority(e.target.value));
   };
 
-  const clearAll = () => {
-    setSelectedDate(null);
-    setSelectedPriority("");
+  const clearAllFiled = () => {
     dispatch(clearSearchTerm());
+    dispatch(setPriority(""));
+    dispatch(setDate(""));
   };
-  console.log(searchTerm);
 
   return (
     <div className="flex justify-center">
@@ -52,7 +57,8 @@ const Filter = () => {
             selected={selectedDate}
             onChange={handleDateChange}
             placeholderText="Select date"
-            className="border-2 rounded-md p-2 focus:outline-none focus:border-blue-500"
+            dateFormat="dd-MM-yyyy"
+            className="border-2 rounded-md p-2 focus:outline-none text-black focus:border-blue-500"
             popperPlacement="top-end"
             popperModifiers={{
               offset: {
@@ -66,14 +72,28 @@ const Filter = () => {
               },
             }}
           />
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700"
-            onClick={clearAll}
-          >
-            Clear All
+
+          {/* Delete All Button */}
+          <button className="relative group">
+            <img
+              src="https://img.icons8.com/3d-fluency/40/trash.png"
+              alt="trash"
+              onClick={() => dispatch(clearAll())}
+              className="relative"
+            />
+            <span className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs invisible group-hover:visible bg-gray-800 text-white p-1 rounded-md">
+              Delete All
+            </span>
           </button>
-          <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
-            Filter
+
+          <button
+            className="text-black px-4 py-2 rounded-md relative group"
+            onClick={clearAllFiled}
+          >
+            <RxCross2 className="relative" />
+            <span className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs invisible group-hover:visible bg-gray-800 text-white p-1 rounded-md">
+              Clear Filter
+            </span>
           </button>
         </div>
       </div>

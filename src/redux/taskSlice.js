@@ -4,6 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   tasks: JSON.parse(localStorage.getItem("tasks")) || [],
   searchTerm: "",
+  selectedPriority: "",
+  selectedDate: null,
 };
 
 export const taskSlice = createSlice({
@@ -42,6 +44,17 @@ export const taskSlice = createSlice({
     clearSearchTerm: (state) => {
       state.searchTerm = "";
     },
+    setPriority: (state, action) => {
+      state.selectedPriority = action.payload;
+    },
+
+    setDate: (state, action) => {
+      state.selectedDate = action.payload;
+    },
+    clearAll: (state) => {
+      state.tasks = [];
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
+    },
   },
 });
 
@@ -52,5 +65,8 @@ export const {
   toogleTask,
   setSearchTerm,
   clearSearchTerm,
+  setPriority,
+  setDate,
+  clearAll,
 } = taskSlice.actions;
 export default taskSlice.reducer;
