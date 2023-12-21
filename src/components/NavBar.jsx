@@ -20,7 +20,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="fixed bottom-10 left-1/2 transform -translate-x-1/2 p-2 px-6 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 text-white bg-opacity-75 backdrop-blur-md z-2 py-2 flex items-center justify-center gap-4">
+      <nav className="fixed bottom-10 left-1/2 transform -translate-x-1/2 p-2 px-6 rounded-full bg-gradient-to-r from-blue-500 to-teal-500 text-white bg-opacity-75 backdrop-blur-md z-50  py-2 flex items-center justify-center gap-4">
         {/* Home Button */}
         <div className="relative group">
           <Link to="/">
@@ -92,7 +92,7 @@ const NavBar = () => {
 
       {/* Task Form Modal */}
       {isTaskFormOpen && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center  bg-opacity-80 bg-black">
+        <div className="absolute z-50 top-0 left-0 w-full h-full flex items-center justify-center  bg-opacity-80 bg-black">
           <AddTask onClose={closeTaskForm} />
         </div>
       )}

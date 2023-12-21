@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
-import { removeTask, updateTask } from "../redux/taskSlice";
+import { removeTask, toogleTask, updateTask } from "../redux/taskSlice";
 import { useState } from "react";
 import { TbBulbFilled } from "react-icons/tb";
 import { TbBulbOff } from "react-icons/tb";
+import { FaCheckCircle } from "react-icons/fa";
+import { FaUndoAlt } from "react-icons/fa";
 import Filter from "../components/Filter";
 
 const TaskList = () => {
@@ -56,20 +58,31 @@ const TaskList = () => {
   };
 
   return (
-    <div className="container mx-auto  overflow-hidden mt-8">
+    <div className="container mx-auto  overflow-hidden mt-8 mb-40">
       <h1 className="text-3xl font-semibold mb-6">Task List</h1>
       <Filter />
 
-      <div className="flex flex-wrap  justify-center gap-4">
+      <div className="flex flex-wrap  justify-center gap-4 ">
         {tasks.map((task, index) => (
           <div key={index} className="w-full md:w-1/2 lg:w-1/4 mb-5">
             <div
-              className={`${
-                blubOn ? randomBg() : "bg-gray-500"
-              } text-black p-6 rounded-lg shadow-md`}
+              className={`
+        ${
+          task.completed
+            ? "bg-slate-400 text-white  border-2 border-gray-700 shadow-md shadow-gray-500"
+            : blubOn
+            ? randomBg()
+            : "bg-gray-500 text-white"
+        } text-black p-6 cursor-pointer rounded-lg shadow-md
+        transition-transform transform ${
+          task.completed ? "" : "hover:scale-105 hover:shadow-lg"
+        } relative z-0
+      `}
             >
               {editMode === task.id ? (
                 <>
+                  {/* Edit Box */}
+                  <h2 className="text-xl font-bold mb-4">Edit Task</h2>
                   <input
                     type="text"
                     value={editedTask}
@@ -102,22 +115,34 @@ const TaskList = () => {
                 </>
               ) : (
                 <>
-                  <h2 className="text-xl font-bold mb-4">{task.task}</h2>
-                  <div className="flex justify-start w-full">
-                    <p className="text-gray-600 mb-4">{task.description}</p>
+                  {/* Cards */}
+                  <div
+                    className={`title ${task.completed ? "line-through " : ""}`}
+                  >
+                    <h2 className="text-xl font-bold mb-4">{task.task}</h2>
+                    <div className="flex justify-start w-full">
+                      <p className="text-gray-600 mb-4">{task.description}</p>
+                    </div>
+                    <p className="text-sm">{task.date}</p>
+                    <p className="text-sm">{task.priority}</p>
                   </div>
-                  <p className="text-sm">{task.date}</p>
-                  <p className="text-sm">{task.priority}</p>
                 </>
               )}
 
               <div className="flex justify-between items-center text-gray-700">
                 <div className="flex items-center space-x-2">
-                  <FontAwesomeIcon
-                    icon={faTrashAlt}
-                    className="cursor-pointer text-red-500 hover:text-red-700"
-                    onClick={() => dispatch(removeTask({ id: task.id }))}
-                  />
+                  {/* //!Toggle  */}
+                  {task.completed ? (
+                    <FaUndoAlt
+                      onClick={() => dispatch(toogleTask({ id: task.id }))}
+                      className="text-black hover:text-gray-900"
+                    />
+                  ) : (
+                    <FaCheckCircle
+                      onClick={() => dispatch(toogleTask({ id: task.id }))}
+                      className="text-green-500 hover:text-green-700"
+                    />
+                  )}
 
                   {editMode === task.id ? (
                     <button
@@ -141,6 +166,11 @@ const TaskList = () => {
                       }
                     />
                   )}
+                  <FontAwesomeIcon
+                    icon={faTrashAlt}
+                    className="cursor-pointer text-red-500 hover:text-red-700"
+                    onClick={() => dispatch(removeTask({ id: task.id }))}
+                  />
                 </div>
               </div>
             </div>

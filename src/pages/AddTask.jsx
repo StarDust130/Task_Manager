@@ -23,7 +23,7 @@ const AddTask = ({ onClose }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center  bg-opacity-80">
-      <div className="bg-gradient-to-r relative from-blue-500 to-teal-500 bg-opacity-80  text-black p-8 rounded-md w-full max-w-md">
+      <div className="bg-gradient-to-r relative from-blue-500 z-50 to-teal-500 bg-opacity-80  text-black p-8 rounded-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4">Add Task</h2>
         <span className="absolute top-3 right-3 cursor-pointer">
           <img

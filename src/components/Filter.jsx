@@ -1,11 +1,16 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useDispatch, useSelector } from "react-redux";
+import { clearSearchTerm, setSearchTerm } from "../redux/taskSlice";
 
 const Filter = () => {
-    const [searchTerm, setSearchTerm] = useState("");
+    // const [searchTerm, setSearchTerm] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedPriority, setSelectedPriority] = useState("");
+
+  const dispatch = useDispatch();
+  const searchTerm = useSelector((state) => state.tasks.searchTerm);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -18,8 +23,9 @@ const Filter = () => {
   const clearAll = () => {
     setSelectedDate(null);
     setSelectedPriority("");
-    setSearchTerm("");
+    dispatch(clearSearchTerm());
   };
+  console.log(searchTerm);
 
   return (
     <div className="flex justify-center">
@@ -28,10 +34,9 @@ const Filter = () => {
           <input
             type="text"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             placeholder="Search tasks"
             className="border-2 rounded-md p-2 flex-grow"
-
           />
           <select
             value={selectedPriority}
