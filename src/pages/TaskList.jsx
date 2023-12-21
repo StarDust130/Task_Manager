@@ -80,6 +80,20 @@ const TaskList = () => {
     return colors[random];
   };
 
+  const getPriorityColor = (priority) => {
+    switch (priority.toLowerCase()) {
+      case "high":
+        return "bg-red-500 ";
+      case "medium":
+        return "bg-yellow-500";
+      case "low":
+        return "bg-green-500";
+      default:
+        return "bg-gray-500";
+    }
+  };
+
+
   return (
     <div className="container mx-auto  overflow-hidden mt-8 mb-40">
       <h1 className="text-3xl font-semibold mb-6">Task List</h1>
@@ -113,7 +127,10 @@ const TaskList = () => {
               />
             </div>
           )}
-          {filteredTasks.map((task, index) => (
+         {filteredTasks.map((task, index) => {
+            const priorityColor = getPriorityColor(task.priority);
+
+            return (
             <div key={index} className="w-full md:w-1/2 lg:w-1/4 mb-5">
               <div
                 className={`
@@ -172,15 +189,20 @@ const TaskList = () => {
                       }`}
                     >
                       <h2 className="text-xl font-bold mb-4">{task.task}</h2>
-                      <div className="flex justify-start w-full">
-                        <p className="text-gray-600 mb-4">{task.description}</p>
-                      </div>
-                      <p className="text-sm">
+                      <p className="text-gray-600 mb-4">{task.description}</p>
+                      <p className="text-sm mb-3">
                         {task.date && !isNaN(new Date(task.date))
                           ? format(new Date(task.date), "dd-MM-yyyy")
                           : ""}
                       </p>
-                      <p className="text-sm">{task.priority}</p>
+                      {/* Priority Badge */}
+                      {task.priority && (
+                        <span
+                          className={`priority-badge mt-3 text-white py-1 px-2 rounded-md ${priorityColor}`}
+                        >
+                          {task.priority}
+                        </span>
+                      )}
                     </div>
                   </>
                 )}
@@ -247,7 +269,7 @@ const TaskList = () => {
                 </div>
               </div>
             </div>
-          ))}
+          )})}
         </div>
       )}
 

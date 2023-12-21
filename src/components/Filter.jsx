@@ -10,6 +10,8 @@ import {
   setDate,
   clearAll,
 } from "../redux/taskSlice";
+import { useState } from "react";
+import ConfirmationModal from "./ConfirmationModal";
 
 
 const Filter = () => {
@@ -17,6 +19,7 @@ const Filter = () => {
   const searchTerm = useSelector((state) => state.tasks.searchTerm);
   const selectedPriority = useSelector((state) => state.tasks.selectedPriority);
   const selectedDate = useSelector((state) => state.tasks.selectedDate);
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
 
   const handleDateChange = (date) => {
     dispatch(setDate(date));
@@ -32,23 +35,40 @@ const Filter = () => {
     dispatch(setDate(""));
   };
 
+    
+
+    const handleDeleteAll = () => {
+      setConfirmationOpen(true);
+      // You can handle the actual deletion logic here
+    };
+
+    const handleCancel = () => {
+      setConfirmationOpen(false);
+    };
+
+    const handleConfirm = () => {
+      // Handle deletion logic here
+      dispatch(clearAll());
+      setConfirmationOpen(false);
+    };
+
   return (
     <div className="flex justify-center">
-      <div className="bg-white w-full md:w-[80%] text-black p-4 rounded-lg shadow-md mb-4">
+      <div className=" w-full md:w-[80%] text-black p-4 rounded-lg shadow-md mb-4">
         <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             placeholder="Search tasks"
-            className="border-2 rounded-md p-2 flex-grow"
+            className="border-2  rounded-md p-2 flex-grow"
           />
           <select
             value={selectedPriority}
             onChange={handlePriorityChange}
-            className="border-2 rounded-md p-2"
+            className="border-2 text-gray-500 rounded-md p-2"
           >
-            <option value="">Select priority</option>
+            <option  value="">Select priority</option>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
@@ -78,7 +98,7 @@ const Filter = () => {
             <img
               src="https://img.icons8.com/3d-fluency/40/trash.png"
               alt="trash"
-              onClick={() => dispatch(clearAll())}
+              onClick={handleDeleteAll}
               className="relative"
             />
             <span className="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs invisible group-hover:visible bg-gray-800 text-white p-1 rounded-md">
@@ -87,7 +107,7 @@ const Filter = () => {
           </button>
 
           <button
-            className="text-black px-4 py-2 rounded-md relative group"
+            className="text-white font-bold bg-red-500 rounded-full py-1 px-1 relative group"
             onClick={clearAllFiled}
           >
             <RxCross2 className="relative" />
@@ -97,6 +117,12 @@ const Filter = () => {
           </button>
         </div>
       </div>
+      {/* Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={isConfirmationOpen}
+        onCancel={handleCancel}
+        onConfirm={handleConfirm}
+      />
     </div>
   );
 };

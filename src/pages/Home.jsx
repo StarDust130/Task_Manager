@@ -1,10 +1,8 @@
 // Home.js
-import  { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import LoadingSkeleton from "../components/LoadingSkeleton";
 
 const LazyBackground = lazy(() => import("../components/LazyImg"));
-
-
 
 const Home = () => {
   return (
