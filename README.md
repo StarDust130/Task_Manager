@@ -14,7 +14,7 @@
 
 
 ## Technologies Used
-- React: A powerful JavaScript library for building user interfaces.
-- Tailwind CSS: A utility-first CSS framework for building modern designs.
-- Redux: A predictable state container for managing the application state.
-- React Router: A declarative routing library for React applications.
+- ⚛️ React: A powerful JavaScript library for building user interfaces.
+- 🎨 Tailwind CSS: A utility-first CSS framework for building modern designs.
+- 🔄 Redux: A predictable state container for managing the application state.
+- 🌐 React Router: A declarative routing library for React applications.
