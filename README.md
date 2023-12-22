@@ -13,6 +13,7 @@
 - 🔍 Filter Tasks: Easily organize and find your tasks using the built-in filter feature, making task management a breeze.
 
 
+
 ## Technologies Used
 - ⚛️ React: A powerful JavaScript library for building user interfaces.
 - 🎨 Tailwind CSS: A utility-first CSS framework for building modern designs.
