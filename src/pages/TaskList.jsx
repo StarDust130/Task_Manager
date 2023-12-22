@@ -41,6 +41,7 @@ const TaskList = () => {
     return priorityMatch && dateMatch && searchTermMatch;
   });
 
+  //! Edit Task  Function  
   const handleEditClick = (taskId, taskText, description, date, priority) => {
     setEditMode(taskId);
     setEditedTask(taskText);
@@ -48,7 +49,7 @@ const TaskList = () => {
     setEditedDate(date);
     setEditedPriority(priority);
   };
-
+  //! Save Edited Task Function
   const handleEditSave = () => {
     dispatch(
       updateTask({
@@ -61,7 +62,8 @@ const TaskList = () => {
     );
     setEditMode(null);
   };
-
+ 
+  //! Random Background Color
   const randomBg = () => {
     const colors = [
       "bg-gradient-to-r from-green-300 to-purple-400",
@@ -74,7 +76,7 @@ const TaskList = () => {
       "bg-gradient-to-r from-orange-200 via-orange-300 to-orange-400",
       "bg-gradient-to-r from-indigo-200 via-indigo-300 to-indigo-400",
       "bg-gradient-to-r from-teal-200 via-teal-300 to-teal-400",
-      // Add more as needed
+      
     ];
     const random = Math.floor(Math.random() * colors.length);
     return colors[random];
