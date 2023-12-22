@@ -13,7 +13,6 @@ import {
 import { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 
-
 const Filter = () => {
   const dispatch = useDispatch();
   const searchTerm = useSelector((state) => state.tasks.searchTerm);
@@ -35,22 +34,20 @@ const Filter = () => {
     dispatch(setDate(""));
   };
 
-    
+  const handleDeleteAll = () => {
+    setConfirmationOpen(true);
+    // You can handle the actual deletion logic here
+  };
 
-    const handleDeleteAll = () => {
-      setConfirmationOpen(true);
-      // You can handle the actual deletion logic here
-    };
+  const handleCancel = () => {
+    setConfirmationOpen(false);
+  };
 
-    const handleCancel = () => {
-      setConfirmationOpen(false);
-    };
-
-    const handleConfirm = () => {
-      // Handle deletion logic here
-      dispatch(clearAll());
-      setConfirmationOpen(false);
-    };
+  const handleConfirm = () => {
+    // Handle deletion logic here
+    dispatch(clearAll());
+    setConfirmationOpen(false);
+  };
 
   return (
     <div className="flex justify-center">
@@ -68,11 +65,12 @@ const Filter = () => {
             onChange={handlePriorityChange}
             className="border-2 text-gray-500 rounded-md p-2"
           >
-            <option  value="">Select priority</option>
+            <option value="">Select priority</option>
             <option value="high">High</option>
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
+
           <DatePicker
             selected={selectedDate}
             onChange={handleDateChange}

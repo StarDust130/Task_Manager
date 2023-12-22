@@ -80,6 +80,7 @@ const TaskList = () => {
     return colors[random];
   };
 
+  //! Priority Badge Color
   const getPriorityColor = (priority) => {
     switch (priority.toLowerCase()) {
       case "high":
@@ -92,7 +93,6 @@ const TaskList = () => {
         return "bg-gray-500";
     }
   };
-
 
   return (
     <div className="container mx-auto  overflow-hidden mt-8 mb-40">
@@ -127,13 +127,13 @@ const TaskList = () => {
               />
             </div>
           )}
-         {filteredTasks.map((task, index) => {
+          {filteredTasks.map((task, index) => {
             const priorityColor = getPriorityColor(task.priority);
 
             return (
-            <div key={index} className="w-full md:w-1/2 lg:w-1/4 mb-5">
-              <div
-                className={`
+              <div key={index} className="w-full md:w-1/2 lg:w-1/4 mb-5">
+                <div
+                  className={`
         ${
           task.completed
             ? "bg-slate-400 text-white  border-2 border-gray-700 shadow-md shadow-gray-500"
@@ -145,116 +145,79 @@ const TaskList = () => {
           task.completed ? "" : "hover:scale-105 hover:shadow-lg"
         } relative z-0
       `}
-              >
-                {editMode === task.id ? (
-                  <>
-                    {/* Edit Box */}
-                    <h2 className="text-xl font-bold mb-4">Edit Task</h2>
-                    <input
-                      type="text"
-                      value={editedTask}
-                      onChange={(e) => setEditedTask(e.target.value)}
-                      className="border-2 rounded-md w-full p-2 mb-2"
-                      placeholder="Enter task"
-                    />
-                    <textarea
-                      value={editedDescription}
-                      onChange={(e) => setEditedDescription(e.target.value)}
-                      className="border-2 rounded-md w-full p-2 mb-2"
-                      placeholder="Enter task description"
-                    />
-                    <input
-                      type="date"
-                      value={editedDate}
-                      onChange={(e) => setEditedDate(e.target.value)}
-                      className="border-2 rounded-md w-full p-2 mb-2"
-                    />
-                    <select
-                      value={editedPriority}
-                      onChange={(e) => setEditedPriority(e.target.value)}
-                      className="border-2 rounded-md w-full p-2 mb-2"
-                    >
-                      <option value="">Select priority</option>
-                      <option value="high">High</option>
-                      <option value="medium">Medium</option>
-                      <option value="low">Low</option>
-                    </select>
-                  </>
-                ) : (
-                  <>
-                    {/* Cards */}
-                    <div
-                      className={`title ${
-                        task.completed ? "line-through " : ""
-                      }`}
-                    >
-                      <h2 className="text-xl font-bold mb-4">{task.task}</h2>
-                      <p className="text-gray-600 mb-4">{task.description}</p>
-                      <p className="text-sm mb-3">
-                        {task.date && !isNaN(new Date(task.date))
-                          ? format(new Date(task.date), "dd-MM-yyyy")
-                          : ""}
-                      </p>
-                      {/* Priority Badge */}
-                      {task.priority && (
-                        <span
-                          className={`priority-badge mt-3 text-white py-1 px-2 rounded-md ${priorityColor}`}
-                        >
-                          {task.priority}
-                        </span>
-                      )}
-                    </div>
-                  </>
-                )}
-
-                <div className="flex justify-between items-center text-gray-700">
-                  <div className="flex items-center space-x-2">
-                    {/* Toggle */}
-                    {task.completed ? (
-                      <>
-                        <FaUndoAlt
-                          onClick={() => dispatch(toogleTask({ id: task.id }))}
-                          className="text-black hover:text-gray-900"
-                        />
-                        <FontAwesomeIcon
-                          icon={faTrashAlt}
-                          className="cursor-pointer text-red-500 hover:text-red-700"
-                          onClick={() => dispatch(removeTask({ id: task.id }))}
-                        />
-                      </>
-                    ) : (
-                      <FaCheckCircle
-                        onClick={() => dispatch(toogleTask({ id: task.id }))}
-                        className="text-green-500 hover:text-green-700"
+                >
+                  {editMode === task.id ? (
+                    <>
+                      {/* Edit Box */}
+                      <h2 className="text-xl font-bold mb-4">Edit Task</h2>
+                      <input
+                        type="text"
+                        value={editedTask}
+                        onChange={(e) => setEditedTask(e.target.value)}
+                        className="border-2 rounded-md w-full p-2 mb-2"
+                        placeholder="Enter task"
                       />
-                    )}
-
-                    {!task.completed && (
-                      <>
-                        {editMode === task.id ? (
-                          <button
-                            className="text-blue-500 font-bold hover:text-blue-700"
-                            onClick={handleEditSave}
+                      <textarea
+                        value={editedDescription}
+                        onChange={(e) => setEditedDescription(e.target.value)}
+                        className="border-2 rounded-md w-full p-2 mb-2"
+                        placeholder="Enter task description"
+                      />
+                      <input
+                        type="date"
+                        value={editedDate}
+                        onChange={(e) => setEditedDate(e.target.value)}
+                        className="border-2 rounded-md w-full p-2 mb-2"
+                      />
+                      <select
+                        value={editedPriority}
+                        onChange={(e) => setEditedPriority(e.target.value)}
+                        className="border-2 rounded-md w-full p-2 mb-2"
+                      >
+                        <option value="">Select priority</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                      </select>
+                    </>
+                  ) : (
+                    <>
+                      {/* Cards */}
+                      <div
+                        className={`title ${
+                          task.completed ? "line-through " : ""
+                        }`}
+                      >
+                        <h2 className="text-xl font-bold mb-4">{task.task}</h2>
+                        <p className="text-gray-600 mb-4">{task.description}</p>
+                        <p className="text-sm mb-3">
+                          {task.date && !isNaN(new Date(task.date))
+                            ? format(new Date(task.date), "dd-MM-yyyy")
+                            : ""}
+                        </p>
+                        {/* Priority Badge */}
+                        {task.priority && (
+                          <span
+                            className={`priority-badge mt-3 text-white py-1 px-2 rounded-md ${priorityColor}`}
                           >
-                            Save
-                          </button>
-                        ) : (
-                          <FontAwesomeIcon
-                            icon={faEdit}
-                            className="cursor-pointer text-blue-500 hover:text-blue-700"
-                            onClick={() =>
-                              handleEditClick(
-                                task.id,
-                                task.task,
-                                task.description,
-                                task.date,
-                                task.priority
-                              )
-                            }
-                          />
+                            {task.priority}
+                          </span>
                         )}
-                        {/* Delete */}
-                        {!task.completed && (
+                      </div>
+                    </>
+                  )}
+
+                  <div className="flex justify-between items-center text-gray-700">
+                    <div className="flex items-center space-x-2">
+                      {/* Toggle */}
+                      {task.completed ? (
+                        <>
+                          <FaUndoAlt
+                            onClick={() =>
+                              dispatch(toogleTask({ id: task.id }))
+                            }
+                            className="text-black hover:text-gray-900"
+                          />
                           <FontAwesomeIcon
                             icon={faTrashAlt}
                             className="cursor-pointer text-red-500 hover:text-red-700"
@@ -262,14 +225,63 @@ const TaskList = () => {
                               dispatch(removeTask({ id: task.id }))
                             }
                           />
-                        )}
-                      </>
-                    )}
+                        </>
+                      ) : (
+                        <FaCheckCircle
+                          onClick={() =>
+                            !editMode && dispatch(toogleTask({ id: task.id }))
+                          }
+                          className={`text-green-500 ${
+                            editMode
+                              ? "cursor-not-allowed"
+                              : "hover:text-green-700"
+                          }`}
+                        />
+                      )}
+
+                      {!task.completed && (
+                        <>
+                          {editMode === task.id ? (
+                            <button
+                              className="text-blue-500 font-bold hover:text-blue-700"
+                              onClick={handleEditSave}
+                            >
+                              Save
+                            </button>
+                          ) : (
+                            <FontAwesomeIcon
+                              icon={faEdit}
+                              className="cursor-pointer text-blue-500 hover:text-blue-700"
+                              onClick={() =>
+                                handleEditClick(
+                                  task.id,
+                                  task.task,
+                                  task.description,
+                                  task.date,
+                                  task.priority
+                                )
+                              }
+                            />
+                          )}
+
+                          {/* Delete */}
+                          {!task.completed && (
+                            <FontAwesomeIcon
+                              icon={faTrashAlt}
+                              className="cursor-pointer text-red-500 hover:text-red-700"
+                              onClick={() =>
+                                dispatch(removeTask({ id: task.id }))
+                              }
+                            />
+                          )}
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )})}
+            );
+          })}
         </div>
       )}
 
