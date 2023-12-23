@@ -1,6 +1,8 @@
 #  Task Manager 📝
 ### Welcome to the Awesome Task Manager! 🚀 Built with React, Tailwind CSS, Redux, and React Router for seamless task management, featuring bold CRUD operations.
 
+## [See Live](https://task-manager-zeta-opal.vercel.app/)
+
 ## Features
 - 🛠️ CRUD Operations (✨Create, 📖Read, 🔄Update, 🗑️Delete): Comprehensive task management with the ability to Create, Read, Update, and Delete tasks effortlessly.
   
