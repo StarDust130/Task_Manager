@@ -16,8 +16,6 @@
 
 
 
-
-
 ## Technologies Used
 - ⚛️ React: A powerful JavaScript library for building user interfaces.
 - 🎨 Tailwind CSS: A utility-first CSS framework for building modern designs.
